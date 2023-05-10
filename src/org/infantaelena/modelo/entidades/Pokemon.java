@@ -8,6 +8,7 @@ package org.infantaelena.modelo.entidades;
  */
 public class Pokemon {
 
+    private String name;
     private int health;
     private int atack;
     private int defense;
@@ -15,7 +16,8 @@ public class Pokemon {
     private Type type;
     private String Habilities;
 
-    public Pokemon(int health, int atack, int defense, int speed, Type type, String habilities) {
+    public Pokemon(String name, int health, int atack, int defense, int speed, Type type, String habilities) {
+        this.name = name;
         this.health = health;
         this.atack = atack;
         this.defense = defense;
@@ -25,6 +27,14 @@ public class Pokemon {
     }
 
     public Pokemon() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getHealth() {

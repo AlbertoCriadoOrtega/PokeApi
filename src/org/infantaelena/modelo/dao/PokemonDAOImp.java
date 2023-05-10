@@ -5,6 +5,11 @@ import org.infantaelena.excepciones.PokemonRepeatedException;
 import org.infantaelena.modelo.entidades.Pokemon;
 
 import java.util.List;
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.Driver;
 
 /**
  *
@@ -17,8 +22,16 @@ import java.util.List;
  */
 public class PokemonDAOImp implements PokemonDAO{
 
+
+
     @Override
     public void crear(Pokemon pokemon) throws PokemonRepeatedException {
+        try {
+            Driver conexion = DriverManager.getConnection("jdbc:mysql://192.168.56.101/empleados?user=admin00&password=alumno");
+        } catch (){
+
+        }
+
 
     }
 
