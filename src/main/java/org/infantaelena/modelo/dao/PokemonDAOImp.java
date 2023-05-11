@@ -30,13 +30,19 @@ public class PokemonDAOImp implements PokemonDAO{
         }
     }
 
+
+    /* <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
+    <dependency>
+        <groupId>org.xerial</groupId>
+        <artifactId>sqlite-jdbc</artifactId>
+        <version>3.36.0.3</version>
+    </dependency>
+
+
+    */
+
     @Override
     public void crear(Pokemon pokemon) throws PokemonRepeatedException {
-        try(Statement st = conection.createStatement()){
-            st.executeUpdate("INSERT INTO personas (nombre) VALUES ('"+Pokemon.+"')");
-        } catch (SQLException e){
-            System.err.println("Error al insertar persona");
-        }
     }
 
     @Override

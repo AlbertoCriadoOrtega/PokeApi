@@ -14,16 +14,14 @@ public class Pokemon {
     private int defense;
     private int speed;
     private Type type;
-    private String Habilities;
 
-    public Pokemon(String name, int health, int atack, int defense, int speed, Type type, String habilities) {
+    public Pokemon(String name, int health, int atack, int defense, int speed, Type type) {
         this.name = name;
         this.health = health;
         this.atack = atack;
         this.defense = defense;
         this.speed = speed;
         this.type = type;
-        Habilities = habilities;
     }
 
     public Pokemon() {
@@ -77,11 +75,4 @@ public class Pokemon {
         this.type = type;
     }
 
-    public String getHabilities() {
-        return Habilities;
-    }
-
-    public void setHabilities(String habilities) {
-        Habilities = habilities;
-    }
 }
