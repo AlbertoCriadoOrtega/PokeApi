@@ -4,6 +4,7 @@ import org.infantaelena.excepciones.PokemonNotFoundException;
 import org.infantaelena.excepciones.PokemonRepeatedException;
 import org.infantaelena.modelo.entidades.Pokemon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +20,13 @@ public class PokemonDAOImp implements PokemonDAO{
 
     @Override
     public void crear(Pokemon pokemon) throws PokemonRepeatedException {
+        List<Pokemon> pokemonList = new ArrayList<>();
+
+        if (pokemonList.contains(pokemon)) {
+            throw new PokemonRepeatedException("El Pokémon ya existe en la lista.");
+        }
+
+        pokemonList.add(pokemon);
 
     }
 
