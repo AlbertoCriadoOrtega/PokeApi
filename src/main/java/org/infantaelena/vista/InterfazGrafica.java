@@ -27,18 +27,47 @@ public class InterfazGrafica extends JFrame {
         panelNombre.add(nombre);
         panelDatos.add(panelNombre);
 
-        JPanel panelApellido = new JPanel();
-        panelApellido.add(new JLabel("Apellido:"));
+        JPanel panelTipo = new JPanel();
+        panelTipo.add(new JLabel("Tipo:"));
         apellido = new JTextField(20);
-        panelApellido.add(apellido);
-        panelDatos.add(panelApellido);
+        panelTipo.add(apellido);
+        panelDatos.add(panelTipo);
 
-        JPanel panelNumReg = new JPanel();
-        panelNumReg.add(new JLabel("Número de registro:"));
+        JPanel panelHP = new JPanel();
+        panelHP.add(new JLabel("HP:"));
         numReg = new JTextField(20);
-        panelNumReg.add(numReg);
-        panelDatos.add(panelNumReg);
+        panelHP.add(numReg);
+        panelDatos.add(panelHP);
 
+        JPanel panelAtaque = new JPanel();
+        panelAtaque.add(new JLabel("Ataque:"));
+        numReg = new JTextField(20);
+        panelAtaque.add(numReg);
+        panelDatos.add(panelAtaque);
+
+        JPanel panelAtaqueEspecial = new JPanel();
+        panelAtaqueEspecial.add(new JLabel("Ataque Especial:"));
+        numReg = new JTextField(20);
+        panelAtaqueEspecial.add(numReg);
+        panelDatos.add(panelAtaqueEspecial);
+
+        JPanel panelDefensa = new JPanel();
+        panelDefensa.add(new JLabel("Defensa:"));
+        numReg = new JTextField(20);
+        panelDefensa.add(numReg);
+        panelDatos.add(panelDefensa);
+
+        JPanel panelDefensaEspecial = new JPanel();
+        panelDefensaEspecial.add(new JLabel("DefensaEspecial:"));
+        numReg = new JTextField(20);
+        panelDefensaEspecial.add(numReg);
+        panelDatos.add(panelDefensaEspecial);
+
+        JPanel panelVelocidad = new JPanel();
+        panelVelocidad.add(new JLabel("Velocidad:"));
+        numReg = new JTextField(20);
+        panelVelocidad.add(numReg);
+        panelDatos.add(panelVelocidad);
 
         add(panelDatos, BorderLayout.WEST);
 
