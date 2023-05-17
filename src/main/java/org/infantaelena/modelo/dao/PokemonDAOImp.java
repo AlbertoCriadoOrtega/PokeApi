@@ -27,26 +27,55 @@ public class PokemonDAOImp implements PokemonDAO{
         }
 
         pokemonList.add(pokemon);
-
     }
 
     @Override
     public Pokemon leerPorNombre(String nombre) throws PokemonNotFoundException {
-        return null;
+        List<Pokemon> pokemonList = new ArrayList<>();
+        for (int i = 0; i < pokemonList.size(); i++) {
+            if (nombre == pokemonList.get(i).getNombre()){
+                return pokemonList.get(i);
+            }
+        }
+        try {
+            throw new PokemonNotFoundException("no se encuentra el pokemon que se busca");
+        } catch (PokemonNotFoundException e){
+            return null;
+        }
     }
 
     @Override
     public List<Pokemon> leerTodos() {
-        return null;
+        List<Pokemon> pokemonList = new ArrayList<>();
+
+        List<Pokemon> devuelve = new ArrayList<>();
+
+        for (int i = 0; i < pokemonList.size(); i++) {
+            devuelve.add(pokemonList.get(i));
+        }
+
+        return devuelve;
     }
 
     @Override
     public void actualizar(Pokemon pokemon) throws PokemonNotFoundException {
+        List<Pokemon> pokemonList = new ArrayList<>();
+        for (int i = 0; i < pokemonList.size(); i++) {
+            if (pokemon.equals(pokemonList.get(i))){
+
+            }
+        }
+
 
     }
 
     @Override
     public void eliminarPorNombre(String nombre) throws PokemonNotFoundException {
-
+        List<Pokemon> pokemonList = new ArrayList<>();
+        for (int i = 0; i < pokemonList.size(); i++) {
+            if (nombre == pokemonList.get(i).getNombre()){
+                pokemonList.remove(pokemonList.get(i));
+            }
+        }
     }
 }
