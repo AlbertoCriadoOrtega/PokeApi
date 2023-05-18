@@ -9,21 +9,22 @@ package org.infantaelena.modelo.entidades;
 public class Pokemon {
 
     public String nombre;
-    private int health;
-    private int atack;
-    private int defense;
-    private int speed;
-    private Type type;
+    private Type tipo;
     private String Habilities;
+    private int vida;
+    private int ataque;
+    private int defensa;
+    private int velocidad;
 
-    public Pokemon(String nombre, int health, int atack, int defense, int speed, Type type, String habilities) {
+
+    public Pokemon(String nombre, Type type, String habilities, int vida, int ataque, int defensa, int velocidad) {
         this.nombre = nombre;
-        this.health = health;
-        this.atack = atack;
-        this.defense = defense;
-        this.speed = speed;
-        this.type = type;
+        this.tipo = type;
         Habilities = habilities;
+        this.vida = vida;
+        this.ataque = ataque;
+        this.defensa = defensa;
+        this.velocidad = velocidad;
     }
 
     public Pokemon() {
@@ -37,44 +38,12 @@ public class Pokemon {
         this.nombre = nombre;
     }
 
-    public int getHealth() {
-        return health;
+    public Type getTipo() {
+        return tipo;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public int getAtack() {
-        return atack;
-    }
-
-    public void setAtack(int atack) {
-        this.atack = atack;
-    }
-
-    public int getDefense() {
-        return defense;
-    }
-
-    public void setDefense(int defense) {
-        this.defense = defense;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
+    public void setTipo(Type tipo) {
+        this.tipo = tipo;
     }
 
     public String getHabilities() {
@@ -83,6 +52,38 @@ public class Pokemon {
 
     public void setHabilities(String habilities) {
         Habilities = habilities;
+    }
+
+    public int getVida() {
+        return vida;
+    }
+
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
+    public int getAtaque() {
+        return ataque;
+    }
+
+    public void setAtaque(int ataque) {
+        this.ataque = ataque;
+    }
+
+    public int getDefensa() {
+        return defensa;
+    }
+
+    public void setDefensa(int defensa) {
+        this.defensa = defensa;
+    }
+
+    public int getVelocidad() {
+        return velocidad;
+    }
+
+    public void setVelocidad(int velocidad) {
+        this.velocidad = velocidad;
     }
 
     @Override
