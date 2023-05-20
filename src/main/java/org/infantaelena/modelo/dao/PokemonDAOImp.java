@@ -63,17 +63,12 @@ public class PokemonDAOImp implements PokemonDAO{
 
     @Override
     public Pokemon leerPorNombre(String nombre) throws PokemonNotFoundException {
-        List<Pokemon> pokemonList = new ArrayList<>();
-        for (int i = 0; i < pokemonList.size(); i++) {
-            if (nombre == pokemonList.get(i).getNombre()){
-                return pokemonList.get(i);
-            }
+        try(Statement st = conection.createStatement()){
+            st.executeUpdate( "SELECT * FROM pokemon WHERE nombre = '" + nombre);
+        } catch (SQLException e) {
+            System.err.println();
         }
-        try {
-            throw new PokemonNotFoundException("no se encuentra el pokemon que se busca");
-        } catch (PokemonNotFoundException e){
-            return null;
-        }
+        return null;//esta a null por que no se como hacer este método, luego lo veo
     }
 
     @Override
@@ -91,11 +86,17 @@ public class PokemonDAOImp implements PokemonDAO{
 
     @Override
     public void actualizar(Pokemon pokemon) throws PokemonNotFoundException {
-        List<Pokemon> pokemonList = new ArrayList<>();
-        for (int i = 0; i < pokemonList.size(); i++) {
-            if (pokemon.equals(pokemonList.get(i))){
-            /* UPDATE POKEMON SET "DATOS" WHERE POKEMON.NAME = POKEMON.NAMEeXT */
-            }
+        try(Statement st = conection.createStatement()) {
+            st.executeUpdate( "UPDATE pokemon SET tipo = '" + pokemon.getTipo() +
+                    "', habilidades = '" + pokemon.getHabilidades()+
+                    "', vida = '" + pokemon.getVida() +
+                    "', ataque = " + pokemon.getAtaque() +
+                    ", defensa = " + pokemon.getDefensa() +
+                    ", velocidad = " + pokemon.getVelocidad() +
+                    " WHERE nombre = '" + pokemon.getNombre());
+            System.out.println("Pokemon actualizado correctamente");
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar pokemon");
         }
 
 
@@ -103,11 +104,10 @@ public class PokemonDAOImp implements PokemonDAO{
 
     @Override
     public void eliminarPorNombre(String nombre) throws PokemonNotFoundException {
-        List<Pokemon> pokemonList = new ArrayList<>();
-        for (int i = 0; i < pokemonList.size(); i++) {
-            if (nombre == pokemonList.get(i).getNombre()){
-                pokemonList.remove(pokemonList.get(i));
-            }
-        }
+       try(Statement st = conection.createStatement()){
+          st.executeUpdate("DELETE pokemon from pokemon nombre = " + nombre );
+       }catch (SQLException e){
+           System.err.println("El pokemon no se ha podido eliminar");
+       }
     }
 }
