@@ -45,23 +45,11 @@ public class InterfazGrafica extends JFrame {
         panelAtaque.add(numReg);
         panelDatos.add(panelAtaque);
 
-        JPanel panelAtaqueEspecial = new JPanel();
-        panelAtaqueEspecial.add(new JLabel("Ataque Especial:"));
-        numReg = new JTextField(20);
-        panelAtaqueEspecial.add(numReg);
-        panelDatos.add(panelAtaqueEspecial);
-
         JPanel panelDefensa = new JPanel();
         panelDefensa.add(new JLabel("Defensa:"));
         numReg = new JTextField(20);
         panelDefensa.add(numReg);
         panelDatos.add(panelDefensa);
-
-        JPanel panelDefensaEspecial = new JPanel();
-        panelDefensaEspecial.add(new JLabel("DefensaEspecial:"));
-        numReg = new JTextField(20);
-        panelDefensaEspecial.add(numReg);
-        panelDatos.add(panelDefensaEspecial);
 
         JPanel panelVelocidad = new JPanel();
         panelVelocidad.add(new JLabel("Velocidad:"));
