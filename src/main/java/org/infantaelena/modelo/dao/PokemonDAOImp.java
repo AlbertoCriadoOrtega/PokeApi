@@ -114,10 +114,16 @@ public class PokemonDAOImp implements PokemonDAO{
 
     @Override
     public void eliminarPorNombre(String nombre) throws PokemonNotFoundException {
-       try(Statement st = conection.createStatement()){
-          st.executeUpdate("DELETE pokemon from pokemon nombre = " + nombre );
-       }catch (SQLException e){
-           System.err.println("El pokemon no se ha podido eliminar");
-       }
+        try (Statement st = conection.createStatement()) {
+            String query = "DELETE FROM pokemon WHERE nombre = '" + nombre + "'";
+            int rowsAffected = st.executeUpdate(query);
+            if (rowsAffected == 0) {
+                throw new PokemonNotFoundException("El pokemon no se ha podido eliminar");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al eliminar el pokemon: " + e.getMessage());
+        }
     }
+
+
 }

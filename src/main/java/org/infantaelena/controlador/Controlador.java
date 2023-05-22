@@ -28,8 +28,8 @@ public class Controlador {
         vista = new Vista();
         modelo = new PokemonDAOImp();
 
-        /* Pokemon pokemon = new Pokemon("Squirte", Type.Agua,"Pistola agua;Burbuja",100,100,100,100);
-        insertar(pokemon); */
+        Pokemon pokemon = new Pokemon("Squirte", Type.Agua,"Pistola agua;Burbuja",100,100,100,100);
+        insertar(pokemon);
 
         borrar("Squirte");
 
