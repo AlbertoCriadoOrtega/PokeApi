@@ -54,12 +54,22 @@ public class PokemonDAOImp implements PokemonDAO{
 
     @Override
     public void crear(Pokemon pokemon) throws PokemonRepeatedException {
-        try(Statement st = conection.createStatement()){
-            st.executeUpdate("INSERT INTO pokemon (nombre) VALUES ('"+pokemon.getNombre()+"')");
-        } catch (SQLException e){
-            System.err.println("Error al insertar persona");
+        try (Statement st = conection.createStatement()) {
+            String query = "INSERT INTO pokemon (nombre, tipo, habilidades, vida, ataque, defensa, velocidad) " +
+                    "VALUES ('" + pokemon.getNombre() +
+                    "', '" + pokemon.getTipo() +
+                    "', '" + pokemon.getHabilidades() +
+                    "', " + pokemon.getVida() +
+                    ", " + pokemon.getAtaque() +
+                    ", " + pokemon.getDefensa() +
+                    ", " + pokemon.getVelocidad() +
+                                ")";
+            st.executeUpdate(query);
+        } catch (SQLException e ) {
+            System.err.println("Error al insertar pokemon: " + e.getMessage());
         }
     }
+
 
     @Override
     public Pokemon leerPorNombre(String nombre) throws PokemonNotFoundException {
