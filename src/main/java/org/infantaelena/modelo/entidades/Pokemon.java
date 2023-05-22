@@ -8,71 +8,92 @@ package org.infantaelena.modelo.entidades;
  */
 public class Pokemon {
 
-    private String name;
-    private int health;
-    private int atack;
-    private int defense;
-    private int speed;
-    private Type type;
+    public String nombre;
+    private Type tipo;
+    private String Habilidades;
+    private int vida;
+    private int ataque;
+    private int defensa;
+    private int velocidad;
 
-    public Pokemon(String name, int health, int atack, int defense, int speed, Type type) {
-        this.name = name;
-        this.health = health;
-        this.atack = atack;
-        this.defense = defense;
-        this.speed = speed;
-        this.type = type;
+
+    public Pokemon(String nombre, Type type, String habilities, int vida, int ataque, int defensa, int velocidad) {
+        this.nombre = nombre;
+        this.tipo = type;
+        Habilidades = habilities;
+        this.vida = vida;
+        this.ataque = ataque;
+        this.defensa = defensa;
+        this.velocidad = velocidad;
     }
 
     public Pokemon() {
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public int getHealth() {
-        return health;
+    public Type getTipo() {
+        return tipo;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public void setTipo(Type tipo) {
+        this.tipo = tipo;
     }
 
-    public int getAtack() {
-        return atack;
+    public String getHabilidades() {
+        return Habilidades;
     }
 
-    public void setAtack(int atack) {
-        this.atack = atack;
+    public void setHabilidades(String habilidades) {
+        Habilidades = habilidades;
     }
 
-    public int getDefense() {
-        return defense;
+    public int getVida() {
+        return vida;
     }
 
-    public void setDefense(int defense) {
-        this.defense = defense;
+    public void setVida(int vida) {
+        this.vida = vida;
     }
 
-    public int getSpeed() {
-        return speed;
+    public int getAtaque() {
+        return ataque;
     }
 
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    public void setAtaque(int ataque) {
+        this.ataque = ataque;
     }
 
-    public Type getType() {
-        return type;
+    public int getDefensa() {
+        return defensa;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setDefensa(int defensa) {
+        this.defensa = defensa;
+    }
+
+    public int getVelocidad() {
+        return velocidad;
+    }
+
+    public void setVelocidad(int velocidad) {
+        this.velocidad = velocidad;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Pokemon pokemon = (Pokemon) o;
+
+        return nombre.equals(pokemon.nombre);
     }
 
 }

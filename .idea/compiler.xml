@@ -6,11 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Trabajoprogramacion" />
+        <module name="PokeAPI" />
         <module name="EjemploMVC" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="PokeAPI" target="11" />
-    </bytecodeTargetLevel>
   </component>
 </project>
