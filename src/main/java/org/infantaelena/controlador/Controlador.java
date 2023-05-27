@@ -28,11 +28,11 @@ public class Controlador {
         vista = new Vista();
         modelo = new PokemonDAOImp();
 
-        Pokemon pokemon = new Pokemon("Squirlte", Type.Agua,"Pistola agua;Burbuja",100,100,100,100);
-        insertar(pokemon);
-
-        borrar("Squirlte");
-
+       /* Pokemon pokemon = new Pokemon("Squirlte", Type.Agua,"Pistola agua;Burbuja",100,100,100,100);
+        insertar(pokemon);*/
+        //LeerNombre("Squirtle");
+        Pokemon pokemon = new Pokemon("Squirlte", Type.Agua,"Pistola agua;Burbuja",100,200,100,100);
+        actualizar(pokemon);
     }
 
     private void insertar(Pokemon pokemon) {
@@ -43,7 +43,7 @@ public class Controlador {
         }
     }
 
-    private void borrar(String nombre) {
+    public void borrar(String nombre) {
         try{
             modelo.eliminarPorNombre(nombre);
         } catch (PokemonNotFoundException e) {

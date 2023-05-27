@@ -108,18 +108,77 @@ public class PokemonDAOImp implements PokemonDAO{
 
 
     @Override
-    public List<Pokemon> leerTodos(Pokemon pokemon) {
+    public List<Pokemon> leerTodos() {
+        Pokemon pokemon;
         List<Pokemon> pokemonList = new ArrayList<>();
 
         List<Pokemon> devuelve = new ArrayList<>();
-
+        //Seleccionamos el pokemon por el tipo
         try(Statement st = conection.createStatement()) {
-            String query = "Select * from pokemon WHERE tipo = '" + pokemon.getTipo() + "'";
+            String query = "Select * from pokemon";
             ResultSet rs = st.executeQuery(query);
 
-            if (pokemon.getTipo() == null){
-                throw new PokemonNotFoundException("Tipo no encontrado")
-            }
+            do {
+                if (rs.next()) {
+                    pokemon = SacarPokemonLeerTodos();
+                    devuelve.add(pokemon);
+                }
+
+            }while (rs.next());
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        for (int i = 0; i < pokemonList.size(); i++) {
+            devuelve.add(pokemonList.get(i));
+        }
+
+        return devuelve;
+    }
+
+    public Pokemon SacarPokemonLeerTipo(String type) {
+        try (Statement st = connection.createStatement()) {
+            String query = "SELECT * FROM pokemon WHERE nombre = '" + type + "'";
+            ResultSet rs = st.executeQuery(query);
+
+            String nombreP = rs.getString("nombre");
+            Type tipo = Type.valueOf(rs.getString("tipo"));
+            String habilidades = rs.getString("habilidades");
+            int vida = rs.getInt("vida");
+            int ataque = rs.getInt("ataque");
+            int defensa = rs.getInt("defensa");
+            int velocidad = rs.getInt("velocidad");
+            Pokemon pokemon = new Pokemon(nombreP, tipo, habilidades, vida, ataque, defensa, velocidad);
+
+            return pokemon;
+        } catch (SQLException e) {
+            System.out.printf(e.getMessage());
+        }
+
+        return null;
+    }
+
+    @Override
+    public List<Pokemon> leerTodos(String tipo) {
+        Pokemon pokemon;
+        List<Pokemon> pokemonList = new ArrayList<>();
+
+        List<Pokemon> devuelve = new ArrayList<>();
+        //Seleccionamos el pokemon por el tipo
+        try(Statement st = conection.createStatement()) {
+            String query = "SELECT * FROM pokemon WHERE tipo = '" + tipo + "'";
+            ResultSet rs = st.executeQuery(query);
+
+            do {
+                if (rs.next()) {
+                    pokemon = SacarPokemonLeerTipo(tipo);
+                    devuelve.add(pokemon);
+                }
+
+            }while (rs.next());
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -144,7 +203,7 @@ public class PokemonDAOImp implements PokemonDAO{
                     " WHERE nombre = '" + pokemon.getNombre());
             System.out.println("Pokemon actualizado correctamente");
         } catch (SQLException e) {
-            System.out.println("Error al actualizar pokemon");
+            System.out.println("Error al actualizar pokemon"+ e.getMessage());
         }
 
 

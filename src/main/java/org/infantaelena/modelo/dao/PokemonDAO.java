@@ -30,6 +30,8 @@ public interface PokemonDAO {
 
     // Método para actualizar un Pokemon en la base de datos
 
+    List<Pokemon> leerTodos(String tipo);
+
     public void actualizar(Pokemon pokemon) throws PokemonNotFoundException;
 
     // Método para eliminar un Pokemon por su nombre
