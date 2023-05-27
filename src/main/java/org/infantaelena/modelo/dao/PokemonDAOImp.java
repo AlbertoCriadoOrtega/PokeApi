@@ -194,7 +194,7 @@ public class PokemonDAOImp implements PokemonDAO{
     @Override
     public void actualizar(Pokemon pokemon) throws PokemonNotFoundException {
         try(Statement st = conection.createStatement()) {
-            st.executeUpdate( "UPDATE pokemon SET tipo = '" + pokemon.getTipo() +
+            st.executeUpdate( "UPDATE pokemon SET  = '" + pokemon.getTipo() +
                     "', habilidades = '" + pokemon.getHabilidades()+
                     "', vida = '" + pokemon.getVida() +
                     "', ataque = " + pokemon.getAtaque() +

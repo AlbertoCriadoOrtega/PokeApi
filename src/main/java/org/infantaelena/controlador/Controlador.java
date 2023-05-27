@@ -31,7 +31,7 @@ public class Controlador {
        /* Pokemon pokemon = new Pokemon("Squirlte", Type.Agua,"Pistola agua;Burbuja",100,100,100,100);
         insertar(pokemon);*/
         //LeerNombre("Squirtle");
-        Pokemon pokemon = new Pokemon("Squirlte", Type.Agua,"Pistola agua;Burbuja",100,200,100,100);
+        Pokemon pokemon = new Pokemon("Squirlte", Type.Agua,"Pistola agua;Burbuja",200,200,100,100);
         actualizar(pokemon);
     }
 
