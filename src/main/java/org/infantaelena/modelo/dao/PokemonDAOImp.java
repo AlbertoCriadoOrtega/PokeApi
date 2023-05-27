@@ -65,7 +65,7 @@ public class PokemonDAOImp implements PokemonDAO{
                     ", " + pokemon.getAtaque() +
                     ", " + pokemon.getDefensa() +
                     ", " + pokemon.getVelocidad() +
-                                ")";
+                    ")";
             st.executeUpdate(query);
         } catch (SQLException e ) {
             System.err.println("Error al insertar pokemon: " + e.getMessage());
@@ -73,36 +73,77 @@ public class PokemonDAOImp implements PokemonDAO{
     }
 
 
+    public Pokemon SacarPokemonLeerUno(String nombre) {
+        try (Statement st = connection.createStatement()) {
+            String query = "SELECT * FROM pokemon WHERE nombre = '" + nombre + "'";
+            ResultSet rs = st.executeQuery(query);
+
+            String nombreP = rs.getString("nombre");
+            Type tipo = Type.valueOf(rs.getString("tipo"));
+            String habilidades = rs.getString("habilidades");
+            int vida = rs.getInt("vida");
+            int ataque = rs.getInt("ataque");
+            int defensa = rs.getInt("defensa");
+            int velocidad = rs.getInt("velocidad");
+            Pokemon pokemon = new Pokemon(nombreP, tipo, habilidades, vida, ataque, defensa, velocidad);
+
+            return pokemon;
+        } catch (SQLException e) {
+            System.out.printf(e.getMessage());
+        }
+
+        return null;
+    }
+
+
     @Override
     public Pokemon leerPorNombre(String nombre) throws PokemonNotFoundException {
         Pokemon pokemon = null;
+
         try (Statement st = connection.createStatement()) {
             String query = "SELECT * FROM pokemon WHERE nombre = '" + nombre + "'";
             ResultSet rs = st.executeQuery(query);
             if (rs.next()) {
-                String nombreP = rs.getString("nombre");
-                Type tipo = Type.valueOf(rs.getString("tipo"));
-                String habilidades = rs.getString("habilidades");
-                int vida = rs.getInt("vida");
-                int ataque = rs.getInt("ataque");
-                int defensa = rs.getInt("defensa");
-                int velocidad = rs.getInt("velocidad");
-                pokemon = new Pokemon(nombreP, tipo, habilidades, vida, ataque, defensa, velocidad);
+                pokemon = SacarPokemonLeerUno(nombre);
             } else {
                 throw new PokemonNotFoundException("Pokemon not found with name: " + nombre);
             }
         } catch (SQLException e) {
-            // Handle the exception appropriately (e.g., log it or throw a custom exception)
-            e.printStackTrace();
+            System.out.printf(e.getMessage());
         }
+
         try {
-            if (pokemon == null){
+            if (pokemon == null) {
                 throw new PokemonNotFoundException("Pokemon no encontrado");
             }
-        } catch (PokemonNotFoundException e){
+        } catch (PokemonNotFoundException e) {
             System.err.println("Pokemon no encontrado");
         }
+
         return pokemon;
+    }
+
+    public Pokemon SacarPokemonLeerTodos() {
+        try (Statement st = connection.createStatement()) {
+            String query = "SELECT * FROM pokemon";
+            ResultSet rs = st.executeQuery(query);
+
+            String nombreP = rs.getString("nombre");
+            Type tipo = Type.valueOf(rs.getString("tipo"));
+            String habilidades = rs.getString("habilidades");
+            int vida = rs.getInt("vida");
+            int ataque = rs.getInt("ataque");
+            int defensa = rs.getInt("defensa");
+            int velocidad = rs.getInt("velocidad");
+            Pokemon pokemon = new Pokemon(nombreP, tipo, habilidades, vida, ataque, defensa, velocidad);
+
+            return pokemon;
+
+        } catch (SQLException e) {
+            System.out.printf(e.getMessage());
+        }
+
+        return null;
     }
 
 

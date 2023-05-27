@@ -35,7 +35,7 @@ public class Controlador {
         actualizar(pokemon);
     }
 
-    private void insertar(Pokemon pokemon) {
+    public void insertar(Pokemon pokemon) {
         try{
             modelo.crear(pokemon);
         } catch (PokemonRepeatedException e) {
@@ -48,6 +48,42 @@ public class Controlador {
             modelo.eliminarPorNombre(nombre);
         } catch (PokemonNotFoundException e) {
             System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+    public void actualizar(Pokemon pokemon) {
+        try {
+            modelo.actualizar(pokemon);
+        } catch (PokemonNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
+    public void LeerNombre(String nombre){
+        Pokemon pokemon;
+        try {
+            pokemon = modelo.leerPorNombre(nombre);
+            pokemon.toString();
+        } catch (PokemonNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void LeerTodos(String nombre){
+        try {
+            modelo.leerPorNombre(nombre);
+        } catch (PokemonNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void LeerTipo(String nombre){
+        try {
+            modelo.leerPorNombre(nombre);
+        } catch (PokemonNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
