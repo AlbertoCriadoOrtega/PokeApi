@@ -3,6 +3,7 @@ package org.infantaelena.modelo.dao;
 import org.infantaelena.excepciones.PokemonNotFoundException;
 import org.infantaelena.excepciones.PokemonRepeatedException;
 import org.infantaelena.modelo.entidades.Pokemon;
+import org.infantaelena.modelo.entidades.Type;
 
 import java.sql.*;
 import java.sql.Connection;
@@ -21,6 +22,7 @@ import java.util.List;
 public class PokemonDAOImp implements PokemonDAO{
 
     Connection conection;
+    private Connection connection;
 
     public PokemonDAOImp(){
         try {
@@ -39,10 +41,10 @@ public class PokemonDAOImp implements PokemonDAO{
         try {
             conection.createStatement().executeUpdate(
                     "CREATE TABLE IF NOT EXISTS pokemon (" +
-                            "nombre string primary key ," +
+                            "nombre varchar(30) primary key ," +
                             "tipo varchar(30),"+
                             "habilidades varchar(255) ," +
-                            "vida varchar(30)," +
+                            "vida int(30)," +
                             "ataque int," +
                             "defensa int," +
                             "velocidad int)");
@@ -73,13 +75,37 @@ public class PokemonDAOImp implements PokemonDAO{
 
     @Override
     public Pokemon leerPorNombre(String nombre) throws PokemonNotFoundException {
-        try(Statement st = conection.createStatement()){
-            st.executeUpdate( "SELECT * FROM pokemon WHERE nombre = '" + nombre);
+        Pokemon pokemon = null;
+        try (Statement st = connection.createStatement()) {
+            String query = "SELECT * FROM pokemon WHERE nombre = '" + nombre + "'";
+            ResultSet rs = st.executeQuery(query);
+            if (rs.next()) {
+                String nombreP = rs.getString("nombre");
+                Type tipo = Type.valueOf(rs.getString("tipo"));
+                String habilidades = rs.getString("habilidades");
+                int vida = rs.getInt("vida");
+                int ataque = rs.getInt("ataque");
+                int defensa = rs.getInt("defensa");
+                int velocidad = rs.getInt("velocidad");
+                pokemon = new Pokemon(nombreP, tipo, habilidades, vida, ataque, defensa, velocidad);
+            } else {
+                throw new PokemonNotFoundException("Pokemon not found with name: " + nombre);
+            }
         } catch (SQLException e) {
-            System.err.println();
+            // Handle the exception appropriately (e.g., log it or throw a custom exception)
+            e.printStackTrace();
         }
-        return null;//esta a null por que no se como hacer este método, luego lo veo
+        try {
+            if (pokemon == null){
+                throw new PokemonNotFoundException("Pokemon no encontrado");
+            }
+        } catch (PokemonNotFoundException e){
+            System.err.println("Pokemon no encontrado");
+        }
+        return pokemon;
     }
+
+
 
     @Override
     public List<Pokemon> leerTodos() {
@@ -124,6 +150,4 @@ public class PokemonDAOImp implements PokemonDAO{
             System.err.println("Error al eliminar el pokemon: " + e.getMessage());
         }
     }
-
-
 }

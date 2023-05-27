@@ -28,10 +28,10 @@ public class Controlador {
         vista = new Vista();
         modelo = new PokemonDAOImp();
 
-        Pokemon pokemon = new Pokemon("Squirte", Type.Agua,"Pistola agua;Burbuja",100,100,100,100);
+        Pokemon pokemon = new Pokemon("Squirlte", Type.Agua,"Pistola agua;Burbuja",100,100,100,100);
         insertar(pokemon);
 
-        borrar("Squirte");
+        borrar("Squirlte");
 
     }
 
@@ -47,6 +47,7 @@ public class Controlador {
         try{
             modelo.eliminarPorNombre(nombre);
         } catch (PokemonNotFoundException e) {
+            System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
     }
