@@ -108,10 +108,22 @@ public class PokemonDAOImp implements PokemonDAO{
 
 
     @Override
-    public List<Pokemon> leerTodos() {
+    public List<Pokemon> leerTodos(Pokemon pokemon) {
         List<Pokemon> pokemonList = new ArrayList<>();
 
         List<Pokemon> devuelve = new ArrayList<>();
+
+        try(Statement st = conection.createStatement()) {
+            String query = "Select * from pokemon WHERE tipo = '" + pokemon.getTipo() + "'";
+            ResultSet rs = st.executeQuery(query);
+
+            if (pokemon.getTipo() == null){
+                throw new PokemonNotFoundException("Tipo no encontrado")
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         for (int i = 0; i < pokemonList.size(); i++) {
             devuelve.add(pokemonList.get(i));
