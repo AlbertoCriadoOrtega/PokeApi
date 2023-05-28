@@ -70,29 +70,6 @@ public class PokemonDAOImp implements PokemonDAO {
         }
     }
 
-
-    public Pokemon SacarPokemonLeerUno(String nombre) {
-        try (Statement st = connection.createStatement()) {
-            String query = "SELECT * FROM pokemon WHERE nombre = '" + nombre.trim() + "'";
-            ResultSet rs = st.executeQuery(query);
-
-            if (rs.next()) {
-                Pokemon pokemon = new Pokemon();
-                pokemon.setNombre(nombre.trim().toUpperCase());
-                pokemon.setTipo(Type.valueOf(rs.getString("tipo")));
-                pokemon.setVida(rs.getInt("vida"));
-                pokemon.setAtaque(rs.getInt("ataque"));
-                pokemon.setDefensa(rs.getInt("defensa"));
-                return pokemon;
-            }
-        } catch (SQLException e) {
-            System.out.printf(e.getMessage());
-        }
-
-        return null;
-    }
-
-
     @Override
     public Pokemon leerPorNombre(String nombre) throws PokemonNotFoundException {
         Pokemon pokemon = null;

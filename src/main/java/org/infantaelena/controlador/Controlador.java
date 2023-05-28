@@ -72,7 +72,6 @@ public class Controlador {
         for (int i = 0; i < pokemons.size(); i++) {
             System.out.println(pokemons.get(i));
         }
-
     }
 
     public void LeerTipo(String nombre){
