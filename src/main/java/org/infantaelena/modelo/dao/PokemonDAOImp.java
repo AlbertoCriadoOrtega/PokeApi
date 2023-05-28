@@ -232,7 +232,7 @@ public class PokemonDAOImp implements PokemonDAO{
         return devuelve;
     }
 
-    @Override
+   /* @Override
     public void actualizar(Pokemon pokemon) throws PokemonNotFoundException {
         try(Statement st = conection.createStatement()) {
             st.executeUpdate( "UPDATE pokemon SET " +
@@ -242,14 +242,38 @@ public class PokemonDAOImp implements PokemonDAO{
                     "', ataque = '" + pokemon.getAtaque() +
                     "', defensa = '" + pokemon.getDefensa() +
                     "', velocidad = '" + pokemon.getVelocidad() +
-                    " WHERE nombre = '" + pokemon.getNombre() + "'");
+                    " WHERE nombre = '" + pokemon.getNombre()+ "'");
             System.out.println("Pokemon actualizado correctamente");
         } catch (SQLException e) {
             System.out.println("Error al actualizar pokemon"+ e.getMessage());
         }
 
 
-    }
+    }*/
+   @Override
+   public void actualizar(Pokemon pokemon) throws PokemonNotFoundException {
+       String query = "UPDATE pokemon SET tipo=?, habilidades=?, vida=?, ataque=?, defensa=?, velocidad=? WHERE nombre=?";
+
+       try (PreparedStatement st = conection.prepareStatement(query)) {
+           st.setString(1, String.valueOf(pokemon.getTipo()));
+           st.setString(2, pokemon.getHabilidades());
+           st.setInt(3, pokemon.getVida());
+           st.setInt(4, pokemon.getAtaque());
+           st.setInt(5, pokemon.getDefensa());
+           st.setInt(6, pokemon.getVelocidad());
+           st.setString(7, pokemon.getNombre());
+
+           int filasActualizadas = st.executeUpdate();
+           if (filasActualizadas > 0) {
+               System.out.println("Pokemon actualizado correctamente");
+           } else {
+               throw new PokemonNotFoundException("El Pokemon no se encontró en la base de datos");
+           }
+       } catch (SQLException e) {
+           System.out.println("Error al actualizar el Pokemon: " + e.getMessage());
+       }
+   }
+
 
     @Override
     public void eliminarPorNombre(String nombre) throws PokemonNotFoundException {
