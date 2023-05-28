@@ -96,4 +96,16 @@ public class Pokemon {
         return nombre.equals(pokemon.nombre);
     }
 
+    @Override
+    public String toString() {
+        return "Pokemon{" +
+                "nombre='" + nombre + '\'' +
+                ", tipo=" + tipo +
+                ", Habilidades='" + Habilidades + '\'' +
+                ", vida=" + vida +
+                ", ataque=" + ataque +
+                ", defensa=" + defensa +
+                ", velocidad=" + velocidad +
+                '}';
+    }
 }
