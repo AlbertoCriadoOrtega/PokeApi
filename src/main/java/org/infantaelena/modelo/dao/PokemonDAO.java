@@ -28,11 +28,11 @@ public interface PokemonDAO {
 
     // Método para leer todos los Pokemons
 
-    public List<Pokemon> leerTodos() ;
+    public List<Pokemon> leerTipo() ;
 
     // Método para leer todos los Pokemons
 
-    public List<Pokemon> leerTodos(String tipo) ;
+    public List<Pokemon> leerTipo(String tipo) ;
 
     // Método para actualizar un Pokemon en la base de datos
 
