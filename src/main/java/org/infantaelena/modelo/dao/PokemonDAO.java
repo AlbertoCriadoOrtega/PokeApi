@@ -14,6 +14,8 @@ import java.util.List;
  * @date 24/04/2023
  *
  */
+
+
 public interface PokemonDAO {
 
     // Método para crear un nuevo Pokemon
@@ -28,9 +30,11 @@ public interface PokemonDAO {
 
     public List<Pokemon> leerTodos() ;
 
-    // Método para actualizar un Pokemon en la base de datos
+    // Método para leer todos los Pokemons
 
-    List<Pokemon> leerTodos(String tipo);
+    public List<Pokemon> leerTodos(String tipo) ;
+
+    // Método para actualizar un Pokemon en la base de datos
 
     public void actualizar(Pokemon pokemon) throws PokemonNotFoundException;
 
