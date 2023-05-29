@@ -18,7 +18,7 @@ public class Pokemon {
 
 
     public Pokemon(String nombre, Type type, String habilities, int vida, int ataque, int defensa, int velocidad) {
-        this.nombre = nombre;
+        this.nombre = nombre.trim();
         this.tipo = type;
         Habilidades = habilities;
         this.vida = vida;
@@ -28,6 +28,10 @@ public class Pokemon {
     }
 
     public Pokemon() {
+    }
+
+    public Pokemon(String nombre) {
+        setNombre(nombre);
     }
 
     public String getNombre() {

@@ -2,10 +2,11 @@ package org.infantaelena.controlador;
 
 import org.infantaelena.excepciones.PokemonNotFoundException;
 import org.infantaelena.excepciones.PokemonRepeatedException;
-import org.infantaelena.modelo.entidades.Type;
 import org.infantaelena.vista.Vista;
 import org.infantaelena.modelo.dao.PokemonDAOImp;
 import org.infantaelena.modelo.entidades.Pokemon;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -28,11 +29,8 @@ public class Controlador {
         vista = new Vista();
         modelo = new PokemonDAOImp();
 
-       /* Pokemon pokemon = new Pokemon("Squirlte", Type.Agua,"Pistola agua;Burbuja",100,100,100,100);
-        insertar(pokemon);*/
-        //LeerNombre("Squirtle");
-        Pokemon pokemon = new Pokemon("Squirlte", Type.Agua,"Pistola agua;Burbuja",200,200,100,100);
-        actualizar(pokemon);
+        LeerNombre("Squirltee");
+
     }
 
     public void insertar(Pokemon pokemon) {
@@ -59,24 +57,20 @@ public class Controlador {
         }
     }
 
-
-
-
     public void LeerNombre(String nombre){
-        Pokemon pokemon;
         try {
-            pokemon = modelo.leerPorNombre(nombre);
-            pokemon.toString();
+            Pokemon pokemon = new Pokemon();
+            pokemon = modelo.leerPorNombre(nombre.trim());
+            System.out.println(pokemon.toString());
         } catch (PokemonNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void LeerTodos(String nombre){
-        try {
-            modelo.leerPorNombre(nombre);
-        } catch (PokemonNotFoundException e) {
-            throw new RuntimeException(e);
+    public void LeerTodos(){
+        ArrayList<Pokemon> pokemons = (ArrayList<Pokemon>) modelo.leerTipo();
+        for (int i = 0; i < pokemons.size(); i++) {
+            System.out.println(pokemons.get(i));
         }
     }
 
