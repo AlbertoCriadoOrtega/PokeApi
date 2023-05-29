@@ -24,6 +24,14 @@ public class Vista extends JFrame{
     private JTextField velocidad;
     private DefaultTableModel atributosTableModel;
 
+    private JButton btnCrear;
+    private JButton btnModificar;
+    private JButton btnBorrar;
+    private JButton btnFiltrar;
+    private JButton btnListar;
+    private JButton btnGuardarBBDD;
+    private JButton btnCargarBBDD;
+
     public Vista(){
         setTitle("PokeAPI");
         setSize(ANCHO, ALTO);
@@ -89,31 +97,31 @@ public class Vista extends JFrame{
 
         JPanel panelBoton = new JPanel();
 
-        JButton btnCrear = new JButton("Crear");
+        btnCrear = new JButton("Crear");
         panelBoton.add(btnCrear);
         add(panelBoton, BorderLayout.SOUTH);
 
-        JButton btnBorrar = new JButton("Borrar");
+        btnBorrar = new JButton("Borrar");
         panelBoton.add(btnBorrar);
         add(panelBoton, BorderLayout.SOUTH);
 
-        JButton btnListar = new JButton("Listar");
+        btnListar = new JButton("Listar");
         panelBoton.add(btnListar);
         add(panelBoton, BorderLayout.SOUTH);
 
-        JButton btnFiltrar = new JButton("Filtrar");
+        btnFiltrar = new JButton("Filtrar");
         panelBoton.add(btnFiltrar);
         add(panelBoton, BorderLayout.SOUTH);
 
-        JButton btnModificar = new JButton("Modificar");
+        btnModificar = new JButton("Modificar");
         panelBoton.add(btnModificar);
         add(panelBoton, BorderLayout.SOUTH);
 
-        JButton btnGuardarBBDD = new JButton("Guardar BBDD");
+        btnGuardarBBDD = new JButton("Guardar BBDD");
         panelBoton.add(btnGuardarBBDD);
         add(panelBoton, BorderLayout.SOUTH);
 
-        JButton btnCargarBBDD = new JButton("Cargar BBDD");
+        btnCargarBBDD = new JButton("Cargar BBDD");
         panelBoton.add(btnCargarBBDD);
         add(panelBoton, BorderLayout.SOUTH);
 
