@@ -28,7 +28,7 @@ public interface PokemonDAO {
 
     // Método para leer todos los Pokemons
 
-    public List<Pokemon> leerTipo() ;
+    public List<Pokemon> leerTodos() ;
 
     // Método para leer todos los Pokemons
 

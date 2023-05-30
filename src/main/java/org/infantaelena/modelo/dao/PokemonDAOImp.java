@@ -67,6 +67,7 @@ public class PokemonDAOImp implements PokemonDAO {
             st.executeUpdate(query);
         } catch (SQLException e) {
             System.err.println("Error al insertar pokemon: " + e.getMessage());
+            throw new PokemonRepeatedException("no se ha podido insertar");
         }
     }
 
@@ -80,7 +81,13 @@ public class PokemonDAOImp implements PokemonDAO {
 
             if (rs.next()) {
                 String nombreP = rs.getString("nombre");
-                pokemon = new Pokemon(nombreP);
+                Type tipo = Type.valueOf(rs.getString("tipo"));
+                String habilidades = rs.getString("habilidades");
+                int vida = Integer.parseInt(rs.getString("vida"));
+                int ataque = Integer.parseInt(rs.getString("ataque"));
+                int defensa = Integer.parseInt(rs.getString("defensa"));
+                int velocidad = Integer.parseInt(rs.getString("velocidad"));
+                pokemon = new Pokemon(nombreP,tipo,habilidades,vida,ataque,defensa,velocidad);
                 return pokemon;
             } else {
                 throw new PokemonNotFoundException("No se encontró un Pokémon con el nombre: " + nombre.trim());
@@ -100,7 +107,13 @@ public class PokemonDAOImp implements PokemonDAO {
         try (Statement st = connection.createStatement()) {
             ResultSet rs = st.executeQuery("SELECT * FROM pokemon WHERE tipo = '" + tipo.trim() + "'");
             while (rs.next()) {
-                pokemons.add(new Pokemon(rs.getString("nombre")));
+                pokemons.add(new Pokemon(rs.getString("nombre"),
+                        Type.valueOf(rs.getString("Tipo")),
+                        rs.getString("Habilidades"),
+                        rs.getInt("Vida"),
+                        rs.getInt("Ataque"),
+                        rs.getInt("Defensa"),
+                        rs.getInt("Velocidad")));
             }
             rs.close();
         } catch (SQLException e) {
@@ -111,12 +124,18 @@ public class PokemonDAOImp implements PokemonDAO {
     }
 
     @Override
-    public List<Pokemon> leerTipo() {
+    public List<Pokemon> leerTodos() {
         ArrayList<Pokemon> pokemons = new ArrayList<>();
         try (Statement st = connection.createStatement()) {
             ResultSet rs = st.executeQuery("SELECT * FROM pokemon");
             while (rs.next()) {
-                pokemons.add(new Pokemon(rs.getString("nombre")));
+                pokemons.add(new Pokemon(rs.getString("nombre"),
+                        Type.valueOf(rs.getString("Tipo")),
+                        rs.getString("Habilidades"),
+                        rs.getInt("Vida"),
+                        rs.getInt("Ataque"),
+                        rs.getInt("Defensa"),
+                        rs.getInt("Velocidad")));
             }
             rs.close();
         } catch (SQLException e) {
@@ -144,7 +163,7 @@ public class PokemonDAOImp implements PokemonDAO {
             if (filasActualizadas > 0) {
                 System.out.println("Pokemon actualizado correctamente");
             } else {
-                throw new PokemonNotFoundException("El Pokemon no se encontró en la base de datos");
+                throw new PokemonNotFoundException(" no se encontró en la base de datos");
             }
         } catch (SQLException e) {
             System.out.println("Error al actualizar el Pokemon: " + e.getMessage());
@@ -157,7 +176,7 @@ public class PokemonDAOImp implements PokemonDAO {
             String query = "DELETE FROM pokemon WHERE nombre = '" + nombre + "'";
             int rowsAffected = st.executeUpdate(query);
             if (rowsAffected == 0) {
-                throw new PokemonNotFoundException("El pokemon no se ha podido eliminar");
+                throw new PokemonNotFoundException("no se ha podido eliminar");
             }
         } catch (SQLException e) {
             System.err.println("Error al eliminar el pokemon: " + e.getMessage());

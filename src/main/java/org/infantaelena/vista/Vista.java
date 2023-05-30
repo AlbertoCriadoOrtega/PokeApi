@@ -7,17 +7,18 @@ import java.awt.*;
 /**
  * Clase que representa la vista de la aplicación
  * Implementar con menus de texto o con interfaz gráfica
+ *
  * @author
  * @version 1.0
  * @date 24/04/2023
- *
  */
-public class Vista extends JFrame{
+public class Vista extends JFrame {
     private final int ANCHO = 800;
     private final int ALTO = 600;
 
     private JTextField nombre;
-    private JTextField tipo;
+    private JComboBox<String> tipo;
+    private JTextField habilidades;
     private JTextField hp;
     private JTextField ataque;
     private JTextField defensa;
@@ -29,10 +30,10 @@ public class Vista extends JFrame{
     private JButton btnBorrar;
     private JButton btnFiltrar;
     private JButton btnListar;
-    private JButton btnGuardarBBDD;
-    private JButton btnCargarBBDD;
 
-    public Vista(){
+    private JButton btnBuscar;
+
+    public Vista() {
         setTitle("PokeAPI");
         setSize(ANCHO, ALTO);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,9 +50,15 @@ public class Vista extends JFrame{
 
         JPanel panelTipo = new JPanel();
         panelTipo.add(new JLabel("Tipo:"));
-        tipo = new JTextField(20);
+        tipo = new JComboBox<String>(new String[]{"Normal", "Fuego", "Agua", "Planta", "Eléctrico", "Hielo", "Lucha", "Veneno", "Tierra", "Volador", "Psíquico", "Bicho", "Roca", "Fantasma", "Dragón", "Siniestro", "Acero", "Hada"});
         panelTipo.add(tipo);
         panelDatos.add(panelTipo);
+
+        JPanel panelHabilidades = new JPanel();
+        panelHabilidades.add(new JLabel("Habilidades:"));
+        habilidades = new JTextField(20);
+        panelHabilidades.add(habilidades);
+        panelDatos.add(panelHabilidades);
 
         JPanel panelHP = new JPanel();
         panelHP.add(new JLabel("HP:"));
@@ -105,6 +112,10 @@ public class Vista extends JFrame{
         panelBoton.add(btnBorrar);
         add(panelBoton, BorderLayout.SOUTH);
 
+        btnBuscar = new JButton("Buscar");
+        panelBoton.add(btnBuscar);
+        add(panelBoton, BorderLayout.SOUTH);
+
         btnListar = new JButton("Listar");
         panelBoton.add(btnListar);
         add(panelBoton, BorderLayout.SOUTH);
@@ -117,18 +128,131 @@ public class Vista extends JFrame{
         panelBoton.add(btnModificar);
         add(panelBoton, BorderLayout.SOUTH);
 
-        btnGuardarBBDD = new JButton("Guardar BBDD");
-        panelBoton.add(btnGuardarBBDD);
-        add(panelBoton, BorderLayout.SOUTH);
-
-        btnCargarBBDD = new JButton("Cargar BBDD");
-        panelBoton.add(btnCargarBBDD);
-        add(panelBoton, BorderLayout.SOUTH);
-
-
 
         JPanel panelVacio = new JPanel();
         add(panelVacio, BorderLayout.CENTER);
         setVisible(true);
     }
+
+    public int getANCHO() {
+        return ANCHO;
+    }
+
+    public int getALTO() {
+        return ALTO;
+    }
+
+    public JTextField getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(JTextField nombre) {
+        this.nombre = nombre;
+    }
+
+    public JComboBox<String> getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(JComboBox<String> tipo) {
+        this.tipo = tipo;
+    }
+
+    public JTextField getHabilidades() {
+        return habilidades;
+    }
+
+    public void setHabilidades(JTextField habilidades) {
+        this.habilidades = habilidades;
+    }
+
+    public JTextField getHp() {
+        return hp;
+    }
+
+    public void setHp(JTextField hp) {
+        this.hp = hp;
+    }
+
+    public JTextField getAtaque() {
+        return ataque;
+    }
+
+    public void setAtaque(JTextField ataque) {
+        this.ataque = ataque;
+    }
+
+    public JTextField getDefensa() {
+        return defensa;
+    }
+
+    public void setDefensa(JTextField defensa) {
+        this.defensa = defensa;
+    }
+
+    public JTextField getVelocidad() {
+        return velocidad;
+    }
+
+    public void setVelocidad(JTextField velocidad) {
+        this.velocidad = velocidad;
+    }
+
+    public DefaultTableModel getAtributosTableModel() {
+        return atributosTableModel;
+    }
+
+    public void setAtributosTableModel(DefaultTableModel atributosTableModel) {
+        this.atributosTableModel = atributosTableModel;
+    }
+
+    public JButton getBtnCrear() {
+        return btnCrear;
+    }
+
+    public void setBtnCrear(JButton btnCrear) {
+        this.btnCrear = btnCrear;
+    }
+
+    public JButton getBtnModificar() {
+        return btnModificar;
+    }
+
+    public void setBtnModificar(JButton btnModificar) {
+        this.btnModificar = btnModificar;
+    }
+
+    public JButton getBtnBorrar() {
+        return btnBorrar;
+    }
+
+    public void setBtnBorrar(JButton btnBorrar) {
+        this.btnBorrar = btnBorrar;
+    }
+
+    public JButton getBtnBuscar() {
+        return btnBuscar;
+    }
+
+    public void setBtnBuscar(JButton btnBuscar) {
+        this.btnBuscar = btnBuscar;
+    }
+
+    public JButton getBtnFiltrar() {
+        return btnFiltrar;
+    }
+
+    public void setBtnFiltrar(JButton btnFiltrar) {
+        this.btnFiltrar = btnFiltrar;
+    }
+
+    public JButton getBtnListar() {
+        return btnListar;
+    }
+
+    public void setBtnListar(JButton btnListar) {
+        this.btnListar = btnListar;
+    }
+
+
 }

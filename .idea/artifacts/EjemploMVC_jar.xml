@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact name="EjemploMVC:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/EjemploMVC_jar</output-path>
+    <root id="root">
+      <element id="archive" name="EjemploMVC.jar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="module-output" name="EjemploMVC" />
+      </element>
+      <element id="library" level="project" name="Maven: org.xerial:sqlite-jdbc:3.7.2" />
+    </root>
+  </artifact>
+</component>

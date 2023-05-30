@@ -10,7 +10,7 @@ public class Pokemon {
 
     public String nombre;
     private Type tipo;
-    private String Habilidades;
+    private String habilidades;
     private int vida;
     private int ataque;
     private int defensa;
@@ -20,7 +20,7 @@ public class Pokemon {
     public Pokemon(String nombre, Type type, String habilities, int vida, int ataque, int defensa, int velocidad) {
         this.nombre = nombre.trim();
         this.tipo = type;
-        Habilidades = habilities;
+        habilidades = habilities;
         this.vida = vida;
         this.ataque = ataque;
         this.defensa = defensa;
@@ -51,11 +51,11 @@ public class Pokemon {
     }
 
     public String getHabilidades() {
-        return Habilidades;
+        return habilidades;
     }
 
     public void setHabilidades(String habilidades) {
-        Habilidades = habilidades;
+        habilidades = habilidades;
     }
 
     public int getVida() {
@@ -105,7 +105,7 @@ public class Pokemon {
         return "Pokemon{" +
                 "nombre='" + nombre + '\'' +
                 ", tipo=" + tipo +
-                ", Habilidades='" + Habilidades + '\'' +
+                ", Habilidades='" + habilidades + '\'' +
                 ", vida=" + vida +
                 ", ataque=" + ataque +
                 ", defensa=" + defensa +

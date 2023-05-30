@@ -2,21 +2,22 @@ package org.infantaelena.controlador;
 
 import org.infantaelena.excepciones.PokemonNotFoundException;
 import org.infantaelena.excepciones.PokemonRepeatedException;
+import org.infantaelena.modelo.entidades.Type;
 import org.infantaelena.vista.Vista;
 import org.infantaelena.modelo.dao.PokemonDAOImp;
 import org.infantaelena.modelo.entidades.Pokemon;
 
+import javax.swing.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- *
  * Clase que se encarga de obtener los datos de la vista
  * y enviarlos al modelo para que los procese
  *
  * @author
  * @version 1.0
  * @date 24/04/2023
- *
  */
 
 
@@ -29,57 +30,133 @@ public class Controlador {
         vista = new Vista();
         modelo = new PokemonDAOImp();
 
-        LeerNombre("Squirltee");
+        Pokemon pokemon = new Pokemon("Josefina");
+
+        vista.getBtnCrear().addActionListener(e -> {
+            insertar();
+        });
+
+        vista.getBtnBorrar().addActionListener(e -> {
+            borrar();
+        });
+
+        vista.getBtnBuscar().addActionListener(e -> {
+            try {
+                vista.getAtributosTableModel().setRowCount(0);
+                LeerNombre();
+            } catch (PokemonNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        vista.getBtnFiltrar().addActionListener(e -> {
+            vista.getAtributosTableModel().setRowCount(0);
+            LeerTipo();
+        });
+
+        vista.getBtnListar().addActionListener(e -> {
+            vista.getAtributosTableModel().setRowCount(0);
+            LeerTodos();
+        });
+
+        vista.getBtnModificar().addActionListener(e -> {
+            actualizar();
+        });
+
 
     }
 
-    public void insertar(Pokemon pokemon) {
-        try{
-            modelo.crear(pokemon);
+    public Pokemon crearPokemon() {
+        String nombre = String.valueOf(vista.getNombre().getText());
+        Type tipo = Type.valueOf((String) vista.getTipo().getSelectedItem());
+        String habilidades = String.valueOf(vista.getHabilidades().getText());
+        int vida = Integer.parseInt(vista.getHp().getText());
+        int ataque = Integer.parseInt(vista.getHp().getText());
+        int defensa = Integer.parseInt(vista.getAtaque().getText());
+        int velocidad = Integer.parseInt(vista.getDefensa().getText());
+
+        Pokemon pokemon = new Pokemon(nombre, tipo, habilidades, vida, ataque, defensa, velocidad);
+        return pokemon;
+    }
+
+    public void insertar() {
+        try {
+            modelo.crear(crearPokemon());
+            JOptionPane.showMessageDialog(null, "El pokemon " + vista.getNombre().getText()+ " se ha añadido correctamente", "Añadido correctamente", JOptionPane.INFORMATION_MESSAGE);
         } catch (PokemonRepeatedException e) {
+            JOptionPane.showMessageDialog(null, "El pokemon " + vista.getNombre().getText()+" "+ e.getMessage(), "insercion incorrecta", JOptionPane.ERROR_MESSAGE);
             throw new RuntimeException(e);
         }
     }
 
-    public void borrar(String nombre) {
-        try{
-            modelo.eliminarPorNombre(nombre);
-        } catch (PokemonNotFoundException e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
-        }
-    }
-    public void actualizar(Pokemon pokemon) {
+
+    public void borrar() {
         try {
-            modelo.actualizar(pokemon);
+            modelo.eliminarPorNombre(String.valueOf(vista.getNombre().getText()));
+            JOptionPane.showMessageDialog(null, "El pokemon " + vista.getNombre().getText() + " se ha borrado correctamente", "borrado correctamente", JOptionPane.INFORMATION_MESSAGE);
         } catch (PokemonNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "El pokemon " + vista.getNombre().getText()+" "+ e.getMessage(), "borrado incorrecto", JOptionPane.ERROR_MESSAGE);
             throw new RuntimeException(e);
         }
     }
 
-    public void LeerNombre(String nombre){
+    public void actualizar() {
         try {
-            Pokemon pokemon = new Pokemon();
-            pokemon = modelo.leerPorNombre(nombre.trim());
-            System.out.println(pokemon.toString());
+            modelo.actualizar(crearPokemon());
+            JOptionPane.showMessageDialog(null, "El pokemon " + vista.getNombre().getText() + " se ha actualizado correctamente", "actualizado correctamente", JOptionPane.INFORMATION_MESSAGE);
         } catch (PokemonNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "El pokemon " + vista.getNombre().getText()+" "+ e.getMessage(), "borrado incorrecto", JOptionPane.ERROR_MESSAGE);
             throw new RuntimeException(e);
         }
+    }
+
+    public void LeerNombre() throws PokemonNotFoundException {
+       try{
+            Pokemon pokemon = modelo.leerPorNombre(vista.getNombre().getText());
+            Object[] rowData = new Object[]{
+                    pokemon.getNombre(),
+                    pokemon.getTipo(),
+                    pokemon.getHabilidades(),
+                    pokemon.getVida(),
+                    pokemon.getAtaque(),
+                    pokemon.getDefensa(),
+                    pokemon.getVelocidad()
+            };
+            vista.getAtributosTableModel().addRow(rowData);
+       } catch (PokemonNotFoundException e){
+           System.out.println(e.getMessage());
+       }
     }
 
     public void LeerTodos(){
-        ArrayList<Pokemon> pokemons = (ArrayList<Pokemon>) modelo.leerTipo();
-        for (int i = 0; i < pokemons.size(); i++) {
-            System.out.println(pokemons.get(i));
+        for(Pokemon pokemon : modelo.leerTodos()){
+            Object[] rowData = new Object[]{
+                    pokemon.getNombre(),
+                    pokemon.getTipo(),
+                    pokemon.getHabilidades(),
+                    pokemon.getVida(),
+                    pokemon.getAtaque(),
+                    pokemon.getDefensa(),
+                    pokemon.getVelocidad()
+            };
+            vista.getAtributosTableModel().addRow(rowData);
         }
     }
 
-    public void LeerTipo(String nombre){
-        try {
-            modelo.leerPorNombre(nombre);
-        } catch (PokemonNotFoundException e) {
-            throw new RuntimeException(e);
+    public void LeerTipo() {
+        for(Pokemon pokemon : modelo.leerTipo(String.valueOf(vista.getTipo().getSelectedItem()))){
+            Object[] rowData = new Object[]{
+                    pokemon.getNombre(),
+                    pokemon.getTipo(),
+                    pokemon.getHabilidades(),
+                    pokemon.getVida(),
+                    pokemon.getAtaque(),
+                    pokemon.getDefensa(),
+                    pokemon.getVelocidad()
+            };
+            vista.getAtributosTableModel().addRow(rowData);
         }
     }
+
 
 }
