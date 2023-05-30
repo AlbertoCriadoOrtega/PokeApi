@@ -30,39 +30,50 @@ public class Controlador {
         vista = new Vista();
         modelo = new PokemonDAOImp();
 
-        Pokemon pokemon = new Pokemon("Josefina");
+        Pokemon pokemon1 = new Pokemon("Bulbasur",Type.Planta,"Latigo cepa; Drenadora", 100,100,100,50);
+        Pokemon pokemon3 = new Pokemon("Charmander",Type.Fuego,"Ascuas; Pantalla Humo", 100,100,100,50);
+        Pokemon pokemon2 = new Pokemon("Squirtle",Type.Agua,"Pistola agua; Burbuja", 100,100,100,50);
+        try {
+            modelo.crear(pokemon1);
+            modelo.crear(pokemon2);
+            modelo.crear(pokemon3);
+        } catch (PokemonRepeatedException e) {
+            throw new RuntimeException(e);
+        }
 
-        vista.getBtnCrear().addActionListener(e -> {
-            insertar();
-        });
+        try {
+            vista.getBtnCrear().addActionListener(e -> {
+                insertar();
+            });
 
-        vista.getBtnBorrar().addActionListener(e -> {
-            borrar();
-        });
+            vista.getBtnBorrar().addActionListener(e -> {
+                borrar();
+            });
 
-        vista.getBtnBuscar().addActionListener(e -> {
-            try {
+            vista.getBtnBuscar().addActionListener(e -> {
+                try {
+                    vista.getAtributosTableModel().setRowCount(0);
+                    LeerNombre();
+                } catch (PokemonNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
+
+            vista.getBtnFiltrar().addActionListener(e -> {
                 vista.getAtributosTableModel().setRowCount(0);
-                LeerNombre();
-            } catch (PokemonNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
+                LeerTipo();
+            });
 
-        vista.getBtnFiltrar().addActionListener(e -> {
-            vista.getAtributosTableModel().setRowCount(0);
-            LeerTipo();
-        });
+            vista.getBtnListar().addActionListener(e -> {
+                vista.getAtributosTableModel().setRowCount(0);
+                LeerTodos();
+            });
 
-        vista.getBtnListar().addActionListener(e -> {
-            vista.getAtributosTableModel().setRowCount(0);
-            LeerTodos();
-        });
-
-        vista.getBtnModificar().addActionListener(e -> {
-            actualizar();
-        });
-
+            vista.getBtnModificar().addActionListener(e -> {
+                actualizar();
+            });
+        } catch (RuntimeException e){}
+        catch (Exception e){}
 
     }
 
@@ -105,7 +116,7 @@ public class Controlador {
             modelo.actualizar(crearPokemon());
             JOptionPane.showMessageDialog(null, "El pokemon " + vista.getNombre().getText() + " se ha actualizado correctamente", "actualizado correctamente", JOptionPane.INFORMATION_MESSAGE);
         } catch (PokemonNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "El pokemon " + vista.getNombre().getText()+" "+ e.getMessage(), "borrado incorrecto", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El pokemon " + vista.getNombre().getText()+" "+ e.getMessage(), "actualizacion no posible", JOptionPane.ERROR_MESSAGE);
             throw new RuntimeException(e);
         }
     }
